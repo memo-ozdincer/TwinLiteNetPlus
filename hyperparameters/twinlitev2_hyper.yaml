@@ -1,27 +1,27 @@
-lr: 0.0005 #Initial learning rate
-alpha1: 0.7 #seg_tver_da 
-gamma1: 1.33333333333 #seg_tver_da 
-alpha2: 0.9 #seg_tver_ll
-gamma2: 1.33333333333 #seg_tver_ll
+lr: 0.0003 #Initial learning rate (reduced for finer lane detection tuning)
+alpha1: 0.7 #seg_tver_da
+gamma1: 1.33333333333 #seg_tver_da
+alpha2: 0.95 #seg_tver_ll (increased to penalize lane false positives more)
+gamma2: 1.5 #seg_tver_ll (increased for better loss scaling on lanes)
 alpha3: 0.25 #seg_focal alpha
-gamma3: 2.0 #seg_focal gamma
-weight_decay: 0.0005  # optimizer weight decay 
+gamma3: 2.5 #seg_focal gamma (increased to focus more on hard lane pixels)
+weight_decay: 0.001  # optimizer weight decay (increased for better regularization) 
 momentum: 0.9  #AdamW optimizer for  beta1
 eps: 0.00000001 #eps
 ######################Augmentation
-degrees: 10 #Rotation
-translate: 0.1 #Translate
+degrees: 15 #Rotation (increased for more robust lane angle variation)
+translate: 0.15 #Translate (increased for horizontal shift robustness)
 scale: 0.5 #Scale
 shear: 0.0 #Shear
 hgain: 0.015 #Hgain
-sgain: 0.7 #Sgain  
+sgain: 0.7 #Sgain
 vgain: 0.4 #Vgain
 width_crop: 960 #Width for RandomCrop
 height_crop: 540 #Height for RandomCrop
 
-prob_perspective: 0.5
+prob_perspective: 0.7 #Increased for more geometric variation in lanes
 prob_hsv: 0.5
 prob_flip: 0.5
 prob_bilateral: 0.1
 prob_gaussian: 0.1
-prob_crop: 0.1
+prob_crop: 0.3 #Increased for varied aspect ratios and lane perspectives
